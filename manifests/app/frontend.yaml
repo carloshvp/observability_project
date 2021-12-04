@@ -1,7 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-app
+  name: frontend
+  labels: 
+    app: frontend
 spec:
   replicas: 3
   selector:
@@ -14,18 +16,25 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: ghcr.io/thejaysmith/myfrontend:v1
+        image: carloshvp/frontend
+        imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - name: frontendport
+          containerPort: 8080
+          protocol: TCP
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-service
+  name: frontend
+  labels: 
+    app: frontend
 spec:
   selector:
     app: frontend
   ports:
-    - port: 8080
-      targetPort: 8080
+    - name: frontend
+      port: 8080
+      protocol: TCP
+      targetPort: frontendport
   type: LoadBalancer
