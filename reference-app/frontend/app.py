@@ -1,13 +1,13 @@
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 
-from prometheus_flask_exporter import PrometheusMetrics
 import logging
+from prometheus_flask_exporter.multiprocess import GunicornInternalPrometheusMetrics
+
+app = Flask(__name__)
+metrics = GunicornInternalPrometheusMetrics(app)
 
 logging.basicConfig(level=logging.INFO)
 logging.info("Setting LOGLEVEL to INFO")
-app = Flask(__name__)
-metrics = PrometheusMetrics(app)
-metrics.info("app_info", "App Info, this can be anything you want", version="1.0.0")
 
 @app.route('/')
 def homepage():

@@ -37,4 +37,6 @@ spec:
       port: 8080
       protocol: TCP
       targetPort: frontendport
-  type: LoadBalancer
+      nodePort: 30000
+  type: NodePort
+  

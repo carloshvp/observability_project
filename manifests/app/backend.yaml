@@ -39,4 +39,5 @@ spec:
       protocol: TCP
       port: 8081
       targetPort: backendport
-  type: LoadBalancer
+      nodePort: 30001
+  type: NodePort

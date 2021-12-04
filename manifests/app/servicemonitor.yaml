@@ -43,25 +43,3 @@ spec:
   namespaceSelector:
     matchNames:
     - default
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: trial
-  # Change this to the namespace the Prometheus instance is running in
-  namespace: monitoring
-  labels:
-    app: trial
-    release: prometheus
-spec:
-  selector:
-    matchLabels:
-      app: trial
-        #app.selector: trial
-  endpoints:
-  - port: trial
-    path: /metrics
-    interval: 15s
-  namespaceSelector:
-    matchNames:
-    - default
